@@ -35,7 +35,7 @@ That means:
 
 The robot state is:
 $$
-X = [x,\; y,\; \theta]
+X = [x,\; y,\; \theta]\
 $$
 
 Where:
