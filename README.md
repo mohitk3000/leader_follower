@@ -2,7 +2,7 @@
 
 This implementation is a practical approximation of the minimum-energy leader-following controller problem.
 
-Refer the [assignment](Leader-Following_Problem.pdf) for more details about the problem statement.
+Refer the [assignment](Leader-Following_Problem.pdf) from ECPS 208 (Control Systems for Cyber-Physical Systems) in MECPS UCI for more details about the problem statement.
 
 ---
 
@@ -83,8 +83,10 @@ Because in implementation I added:
 This is NOT part of the assignment dynamics.
 
 But, an artificial wall bouncing to keep robot inside screen.
+So actual behavior becomes Circular motion with sudden reflections at walls, 
+apparently random trajectory.
 
-The terms $\cos\theta,\sin\theta$ make the system nonlinear.
+- Here, the terms $\cos\theta,\sin\theta$ make the system nonlinear.
 
 ### For nonlinear systems:
 
@@ -153,11 +155,7 @@ $$
 or equivalently:
 
 $$
-\dot{\mathbf{z}}
-=
-A\mathbf{z}
-+
-B\mathbf{u}
+\dot{\mathbf{z}} = A\mathbf{z} + B\mathbf{u}
 $$
 
 with
@@ -255,15 +253,7 @@ minimum-energy trajectory becomes a cubic polynomial.
 
 ### General cubic form: 
 $$
-x(t)
-=
-a_0
-+
-a_1 t
-+
-a_2 t^2
-+
-a_3 t^3
+x(t) = a_0 + a_1 t + a_2 t^2 + a_3 t^3
 $$
 
 
@@ -296,27 +286,13 @@ $$
 Using
 
 $$
-x(t)
-=
-a_0
-+
-a_1 t
-+
-a_2 t^2
-+
-a_3 t^3
+x(t) = a_0 + a_1 t + a_2 t^2 + a_3 t^3
 $$
 
 and applying the boundary conditions gives:
 
 $$
-x(t)
-=
-x_0
-+
-\frac{3(x_f - x_0)}{T^2} t^2
--
-\frac{2(x_f - x_0)}{T^3} t^3
+x(t) = x_0 + \frac{3(x_f - x_0)}{T^2} t^2 - \frac{2(x_f - x_0)}{T^3} t^3
 $$
 
 #### Velocity comes from derivative
@@ -324,11 +300,7 @@ $$
 Differentiate trajectory:
 
 $$
-\dot{x}(t)
-=
-2a_2 t
-+
-3a_3 t^2
+\dot{x}(t) = 2a_2 t + 3a_3 t^2
 $$
 
 This gives smooth velocity.
@@ -345,12 +317,11 @@ $$
 follower measures leader state.
 
 But it reaches target at:
-$$t_
-{k+1}$$
+$$t_{k+1}$$
 
 #### *Follower is always one step behind*
 
-*"The Follower says: I see where leader was, I will smoothly move there during next interval.”*
+*"The Follower says: I see where leader was, I will smoothly move there during next interval."*
 
 ---
 
@@ -361,11 +332,7 @@ Our linearized system does *NOT* directly control $\theta$. So how do we orient 
 Velocity direction determines orientation:
 
 $$
-\theta
-=
-\tan^{-1}\!\left(
-\frac{\dot{y}}{\dot{x}}
-\right)
+\theta = \tan^{-1}\!\left(\frac{\dot{y}}{\dot{x}}\right)
 $$
 Robot points in direction of motion.
 
@@ -374,11 +341,7 @@ Robot points in direction of motion.
 We compute heading error:
 
 $$
-\text{angle\_error}
-=
-\theta_{\text{desired}}
--
-\theta_{\text{current}}
+\text{angle\_error} = \theta_{\text{desired}} - \theta_{\text{current}}
 $$
 
 and then apply a Proportional controller (P-controller)
@@ -478,19 +441,13 @@ $$
 The translational velocity magnitude becomes:
 
 $$
-v(t)
-=
-\sqrt{
-v_x^2 + v_y^2
-}
+v(t) = \sqrt{v_x^2 + v_y^2}
 $$
 
 Desired heading is computed as:
 
 $$
-\theta_{\text{desired}}
-=
-\operatorname{atan2}(v_y,\; v_x)
+\theta_{\text{desired}} = \operatorname{atan2}(v_y,\; v_x)
 $$
 
 ---
@@ -561,11 +518,7 @@ $$
 Consider the linear system:
 
 $$
-\dot{\mathbf{z}}
-=
-A\mathbf{z}
-+
-B\mathbf{u}
+\dot{\mathbf{z}} = A\mathbf{z} + B\mathbf{u}
 $$
 
 Given:
@@ -589,10 +542,7 @@ $$
 that minimizes the energy cost:
 
 $$
-\boxed{J
-=
-\int_0^T
-\mathbf{u}^\top \mathbf{u}\,dt}
+\boxed{J = \int_0^T \mathbf{u}^\top \mathbf{u}\,dt}
 $$
 
 ---
@@ -602,16 +552,7 @@ $$
 Optimal control theory gives the minimum-energy input:
 
 $$
-\boxed{\mathbf{u}(t)
-=
-B^\top
-e^{A^\top(T-t)}
-W^{-1}(T)
-\left(
-\mathbf{z}_T
--
-e^{AT}\mathbf{z}_0
-\right)}
+\boxed{\mathbf{u}(t) = B^\top e^{A^\top(T-t)} W^{-1}(T) \left(\mathbf{z}_T - e^{AT}\mathbf{z}_0\right)}
 $$
 
 This is the exact minimum-energy controller.
@@ -623,13 +564,7 @@ This is the exact minimum-energy controller.
 The matrix
 
 $$
-\boxed{W(T)
-=
-\int_0^T
-e^{A\tau}
-BB^\top
-e^{A^\top\tau}
-\,d\tau}
+\boxed{W(T) = \int_0^T e^{A\tau} BB^\top e^{A^\top\tau} \,d\tau}
 $$
 
 is called the:
@@ -707,9 +642,7 @@ directly from system dynamics.
 The control law is essentially:
 
 $$
-\omega
-=
-k\,(\theta_{\text{desired}}-\theta)
+\omega = k\,(\theta_{\text{desired}}-\theta)
 $$
 
 with
@@ -739,9 +672,7 @@ $$
 Trajectory first:
 
 $$
-x(t),\,y(t)
-\quad\Rightarrow\quad
-u(t)
+x(t),\,y(t) \quad\Rightarrow\quad u(t)
 $$
 
 ---
@@ -751,9 +682,7 @@ $$
 Control first:
 
 $$
-u(t)
-\quad\Rightarrow\quad
-x(t),\,y(t)
+u(t) \quad\Rightarrow\quad x(t),\,y(t)
 $$
 
 The trajectory emerges automatically from the optimal input.
@@ -790,6 +719,7 @@ Cubic trajectory generation demonstrates understanding of:
 - trajectory optimization concepts
 
 without requiring full optimal-control machinery.
+
 ---
 
 #### Current Controller
@@ -844,11 +774,7 @@ $$
 which are then integrated:
 
 $$
-u
-\rightarrow
-\dot{x},\dot{y}
-\rightarrow
-x,y
+u \rightarrow \dot{x},\dot{y} \rightarrow x,y
 $$
 
 ---
