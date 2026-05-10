@@ -416,7 +416,7 @@ $$
 Desired heading is computed as:
 
 $$
-\theta_{\text{desired}} = \text{atan2}(v_y,\; v_x)
+\theta_{\text{desired}} = \text{atan2}(v_y,\ v_x)
 $$
 
 ---
@@ -724,7 +724,7 @@ at every control cycle.
 Current Controller Outputs Velocity commands:
 
 $$
-v,\;\omega
+v,\omega
 $$
 
 True Minimum-Energy Controller Outputs
@@ -732,13 +732,13 @@ True Minimum-Energy Controller Outputs
 Optimal accelerations:
 
 $$
-u_x,\;u_y
+u_x, u_y
 $$
 
 which are then integrated:
 
 $$
-u \rightarrow \dot{x},\dot{y} \rightarrow x,y
+u \rightarrow \dot{x}; \dot{y} \rightarrow x,y
 $$
 
 ---
