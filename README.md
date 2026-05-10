@@ -2,7 +2,7 @@
 
 This implementation is a practical approximation of the minimum-energy leader-following controller problem.
 
-Refer the [assignment](Leader-Following_Problem.pdf) from ECPS 208 (Control Systems for Cyber-Physical Systems) in MECPS UCI for more details about the problem statement.
+Refer the [assignment](Leader-Following_Problem.pdf) for more details about the problem statement.
 
 ---
 
@@ -341,13 +341,13 @@ Robot points in direction of motion.
 We compute heading error:
 
 $$
-\text{angle\_error} = \theta_{\text{desired}} - \theta_{\text{current}}
+\mathit{angle\_error} = \theta_{\text{desired}} - \theta_{\text{current}}
 $$
 
 and then apply a Proportional controller (P-controller)
 
 $$
-\omega = K_p * \text{angle\_error}
+\omega = K_p * \mathit{angle\_error}
 $$
 
 If robot heading is wrong, it will turn proportionally toward desired direction
@@ -447,7 +447,7 @@ $$
 Desired heading is computed as:
 
 $$
-\theta_{\text{desired}} = \operatorname{atan2}(v_y,\; v_x)
+\theta_{\text{desired}} = \text{atan2}(v_y,\; v_x)
 $$
 
 ---
@@ -719,7 +719,6 @@ Cubic trajectory generation demonstrates understanding of:
 - trajectory optimization concepts
 
 without requiring full optimal-control machinery.
-
 ---
 
 #### Current Controller
