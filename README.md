@@ -471,11 +471,7 @@ Therefore the method is:
 - stable
 - computationally inexpensive
 
-but:
-
-$$
-\text{not strictly mathematically optimal}
-$$
+but not strictly mathematically optimal
 --------
 
 ## True Minimum-Energy Controller
