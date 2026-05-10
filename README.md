@@ -27,19 +27,21 @@ The unicyclerobot is a nonholonomic system.
 That means:
 
 - It cannot instantly move sideways
-- It can only `move forward/backward and rotate`
+- It can only move `forward/backward` and `rotate`
 
 ------------------------------------
 
 ## Robot motion model
 
 The robot state is:
+$$
+X = [x,\; y,\; \theta]
+$$
 
-$$ X=[x, y, θ] $$
 Where:
 
-$x,y$ → position, 
-$θ$ → heading/orientation
+$x,y$ → position,  
+$\theta$ → heading/orientation
 
 The motion equations are:
 
@@ -57,24 +59,32 @@ $$
 
 ### Position update
 
-If robot faces angle $θ$:
+If robot faces angle $\theta$:
 
 - $x$ motion is:
-$vcosθ$
+$v\cos\theta$
 - $y$ motion is:
-$vsinθ$
+$v\sin\theta$
 - Orientation update
-$ω$ controls turning rate.
+$\omega$ controls turning rate.
 
 positive → left turn, negative → right turn
 
 -------------------------------------
 ### working: 
 
-The leader has constant forward speed($v$)
-constant angular velocity($ω$), which produces circular/curved motion.
+The leader has constant forward speed ($v$)  
+and constant angular velocity ($\omega$), which produces circular/curved motion.
 
-The terms $cosθ,sinθ$ make the system nonlinear.
+#### Why the leader LOOKS random
+
+Because in implementation I added:
+`leader_step_with_bounds()`
+This is NOT part of the assignment dynamics.
+
+But, an artificial wall bouncing to keep robot inside screen.
+
+The terms $\cos\theta,\sin\theta$ make the system nonlinear.
 
 ### For nonlinear systems:
 
@@ -328,15 +338,15 @@ This gives smooth velocity.
 
 This is the MOST important concept.
 
-At time: $t_k$
-	​
-
-
+At time: 
+$$
+t_k
+$$
 follower measures leader state.
 
 But it reaches target at:
-$t_
-{k+1}$
+$$t_
+{k+1}$$
 
 #### *Follower is always one step behind*
 
@@ -346,7 +356,7 @@ $t_
 
 ### Orientation control
 
-Our linearized system does *NOT* directly control $θ$. So how do we orient the robot?	
+Our linearized system does *NOT* directly control $\theta$. So how do we orient the robot?	
 
 Velocity direction determines orientation:
 
@@ -377,7 +387,7 @@ $$
 \omega = K_p * \text{angle\_error}
 $$
 
-If robot heading is wrong, it will urn proportionally toward desired direction
+If robot heading is wrong, it will turn proportionally toward desired direction
 
 - Large error: strong turning
 
@@ -406,14 +416,18 @@ Other issues are:
 ----
 ## Effect of sampling time(important )
 Small sampling time
-$T_s$ - 
+$$
+T_s
+$$ - 
 
 Follower gets frequent updates which results in
 - accurate tracking
 - less lag
 
 Large sampling time
-$T_s$ - 
+$$
+T_s
+$$ - 
 
 Follower receives stale information:
 
@@ -435,7 +449,7 @@ The follower behaves like:
 
 ## TODO: 
 1. Implement true minimum-energy Gramian controller: 
-The current implementation is a practical approximation(feedback linearlisation) of the minimum-energy controller, but it is not the true optimal controller derived from the controllability Gramian.
+The current implementation is a practical approximation (feedback linearization) of the minimum-energy controller, but it is not the true optimal controller derived from the controllability Gramian.
 
 ### What current implementation does
 
@@ -849,7 +863,7 @@ $$
 \dot{x}(T)=0
 $$
 
-and similarly for $y$.
+and similarly for $\dot{y}$.
 
 ---
 
