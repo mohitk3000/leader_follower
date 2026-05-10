@@ -294,9 +294,7 @@ This gives smooth velocity.
 This is the MOST important concept.
 
 At time: 
-$$
-t_k
-$$
+$$t_{k}$$
 follower measures leader state.
 
 But it reaches target at:
