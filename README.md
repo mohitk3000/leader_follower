@@ -313,6 +313,7 @@ Our linearized system does *NOT* directly control $\theta$. So how do we orient 
 Velocity direction determines orientation:
 
 $$\theta = \tan^{-1}\left(\frac{\dot{y}}{\dot{x}}\right)$$
+
 Robot points in direction of motion.
 
 
