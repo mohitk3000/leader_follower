@@ -34,9 +34,7 @@ That means:
 ## Robot motion model
 
 The robot state is:
-$$
-X = [x,\; y,\; \theta]
-$$
+$$X = [x,\; y,\; \theta]$$
 
 Where:
 
@@ -134,23 +132,8 @@ $$
 $$
 
 Then the system dynamics become:
-
-$$
-\frac{d}{dt}
-\begin{bmatrix}
-x \\
-\dot{x} \\
-y \\
-\dot{y}
-\end{bmatrix}
-=
-\begin{bmatrix}
-\dot{x} \\
-u_1 \\
-\dot{y} \\
-u_2
-\end{bmatrix}
-$$
+ 
+$$\frac{d}{dt} \begin{bmatrix} x \\ \dot{x} \\ y \\ \dot{y} \end{bmatrix} = \begin{bmatrix} \dot{x} \\ u_1 \\ \dot{y} \\ u_2 \end{bmatrix}$$
 
 or equivalently:
 
@@ -377,22 +360,12 @@ Other issues are:
 
 
 ----
-## Effect of sampling time(important )
-Small sampling time
-$$
-T_s
-$$ - 
-
-Follower gets frequent updates which results in
+## Effect of sampling time($T_s$)
+Small sampling time -  Follower gets frequent updates which results in
 - accurate tracking
 - less lag
 
-Large sampling time
-$$
-T_s
-$$ - 
-
-Follower receives stale information:
+Large sampling time - Follower receives stale information:
 
 - more delay
 - larger tracking error
